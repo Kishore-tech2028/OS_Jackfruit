@@ -124,7 +124,8 @@ sudo bash test.sh
 boilerplate/engine — user-space supervisor binary
 boilerplate/monitor.ko — kernel module
 boilerplate/cpu_hog, boilerplate/memory_hog, boilerplate/io_pulse — statically linked workload binaries
-(screenshots/1.png)
+![Demo](screenshots/1.png)
+
 ### Demo 1 — Multi-Container Supervision
 
 Two containers (`alpha` and `beta`) running concurrently under one supervisor process, each in isolated namespaces.
