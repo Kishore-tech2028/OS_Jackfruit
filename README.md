@@ -130,13 +130,13 @@ boilerplate/cpu_hog, boilerplate/memory_hog, boilerplate/io_pulse — statically
 
 Two containers (`alpha` and `beta`) running concurrently under one supervisor process, each in isolated namespaces.
 
-![Demo 1](screenshots/2.png)
+![Demo 1](screenshots/3.png)
 
 ### Demo 2 — Metadata Tracking
 
 Output of `ps` showing both containers with full metadata: PID, state, start time, soft/hard memory limits, exit code, signal, nice value, rootfs, command, and log path.
 
-![Demo 2](screenshots/3.png)
+![Demo 2](screenshots/2.png)
 
 ### Demo 3 — Bounded-Buffer Logging
 
