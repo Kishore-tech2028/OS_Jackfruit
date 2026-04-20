@@ -121,56 +121,58 @@ sudo bash test.sh
 ---
 
 ## Demo Screenshots
-
+boilerplate/engine — user-space supervisor binary
+boilerplate/monitor.ko — kernel module
+boilerplate/cpu_hog, boilerplate/memory_hog, boilerplate/io_pulse — statically linked workload binaries
+(screenshots/1.png)
 ### Demo 1 — Multi-Container Supervision
 
 Two containers (`alpha` and `beta`) running concurrently under one supervisor process, each in isolated namespaces.
 
-![Demo 1](screenshots/1.png)
+![Demo 1](screenshots/2.png)
 
 ### Demo 2 — Metadata Tracking
 
 Output of `ps` showing both containers with full metadata: PID, state, start time, soft/hard memory limits, exit code, signal, nice value, rootfs, command, and log path.
 
-![Demo 2](screenshots/2.png)
+![Demo 2](screenshots/3.png)
 
 ### Demo 3 — Bounded-Buffer Logging
 
 Log file contents for `alpha` and `beta` captured through the producer/consumer logging pipeline. Each container's stdout is piped into the supervisor, buffered, and flushed to a per-container log file.
 
-![Demo 3](screenshots/3.png)
+![Demo 3](screenshots/4.png)
 
 ### Demo 4 — CLI and IPC
 
 The `run` command issued from the CLI, which blocks until the container exits and returns its final state. Demonstrates the UNIX domain socket control channel between the CLI client and the supervisor.
 
-![Demo 4](screenshots/4.png)
+![Demo 4](screenshots/5.png)
 
 ### Demo 5 — Soft-Limit Warning
 
 `dmesg` output showing the kernel module emitting a soft-limit warning when `mem1`'s RSS exceeded the configured 8 MiB soft limit. The warning is emitted once and the container continues running.
 
-![Demo 5](screenshots/5.png)
+![Demo 5](screenshots/6.png)
 
 ### Demo 6 — Hard-Limit Enforcement
 
 `dmesg` showing the kernel module sending `SIGKILL` when `mem1`'s RSS exceeded the 24 MiB hard limit, followed by the `ps` output confirming the container's state as `hard_limit_killed` with `signal=9`.
 
-![Demo 6](screenshots/6.png)
+![Demo 6](screenshots/7.png)
 
 ### Demo 7 — Scheduling Experiment
 
 Two CPU-bound containers running `cpu_hog` for 15 seconds: `cpu1` at `nice=0` (normal priority) and `cpu2` at `nice=10` (lower priority). Both run the same wall-clock duration on this single-vCPU QEMU host, but CFS assigns `cpu1` higher scheduling weight — observable throughput differences appear under heavier concurrent load.
 
-![Demo 7](screenshots/7.png)
+![Demo 7](screenshots/8.png)
 
 ### Demo 8 — Clean Teardown
 
 After stopping all containers, the `ps` table shows `alpha` and `beta` as `stopped`, the supervisor exits cleanly on `SIGTERM`, no zombie processes remain, and the kernel module unloads cleanly.
 
-![Demo 8.1](screenshots/8.png)
-![Demo 8.2](screenshots/9.png)
-![Demo 8.3](screenshots/10.png)
+![Demo 8.1](screenshots/9.png)
+![Demo 8.2](screenshots/10.png)
 
 ---
 
